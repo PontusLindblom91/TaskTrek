@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "ZAg+a66/DWPMT8mfC30KCOoJb/paCOqmRD9HV8YbCe0rc9cp/0Zt3pvclYmXi/sZqsJv2iq1nUIIp1hFTA44jA==",
+  "dgSpecHash": "oY+eubIxLfT6Np/EnEv8fy6FiN/rNi41d5LOaCm4J9V+v7kYO+55/IUFwA2tbawe5Xg2lFFCfqj9IYFMIZ9qCA==",
   "success": true,
   "projectFilePath": "C:\\Users\\pontu\\Hot-Coding\\Projekt\\Examensarbete-Jensen\\TaskTrek\\TaskTrek.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\pontu\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
     "C:\\Users\\pontu\\.nuget\\packages\\microsoft.aspnetcore.openapi\\8.0.0\\microsoft.aspnetcore.openapi.8.0.0.nupkg.sha512",
     "C:\\Users\\pontu\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\pontu\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",

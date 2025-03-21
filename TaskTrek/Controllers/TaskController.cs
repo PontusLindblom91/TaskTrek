@@ -1,21 +1,26 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using TaskTrek.Models;
 
 namespace TaskTrek.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SprintsController : ControllerBase
+    public class TaskController : ControllerBase
     {
         [HttpGet]
-        public IActionResult GetSprints()
+        public IActionResult GetTasks()
         {
             return null;
         }
 
         [HttpPost]
-        public IActionResult PostSprint(Task task)
+        public IActionResult PostTask(Task task)
+        {
+            return null;
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteTask(int TaskId)
         {
             return null;
         }
