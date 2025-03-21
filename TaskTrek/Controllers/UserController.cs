@@ -5,22 +5,15 @@ namespace TaskTrek.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TaskController : ControllerBase
+    public class UserController : ControllerBase
     {
-        [HttpGet]
-        public IActionResult GetTasks()
-        {
-            return null;
-        }
-
         [HttpPost]
-        public IActionResult PostTask(Task task)
+        public IActionResult InsertUser(string userName)
         {
             return null;
         }
-
-        [HttpDelete]
-        public IActionResult DeleteTask(int TaskId)
+        [HttpGet]
+        public IActionResult GetUsers() 
         {
             return null;
         }
