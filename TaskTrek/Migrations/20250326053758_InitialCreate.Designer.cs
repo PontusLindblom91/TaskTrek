@@ -11,8 +11,8 @@ using TaskTrek.Data.Context;
 namespace TaskTrek.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250321062750_initialCreate")]
-    partial class initialCreate
+    [Migration("20250326053758_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace TaskTrek.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TaskTrek.Models.Entities.Task", b =>
+            modelBuilder.Entity("TaskTrek.Models.Entities.ProjectTask", b =>
                 {
                     b.Property<int>("TaskId")
                         .ValueGeneratedOnAdd()
@@ -32,17 +32,20 @@ namespace TaskTrek.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TaskId"));
 
+                    b.Property<int>("AssignedUser")
+                        .HasColumnType("int");
+
                     b.Property<string>("TaskDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TaskScope")
+                    b.Property<string>("TaskType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TaskId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("ProjectTasks");
                 });
 
             modelBuilder.Entity("TaskTrek.Models.Entities.User", b =>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskTrek.Services;
 
 namespace TaskTrek.Controllers
 {
@@ -7,15 +8,27 @@ namespace TaskTrek.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult InsertUser(string userName)
+        private readonly UserService _userService;
+
+        public UserController(UserService userService)
         {
-            return null;
+            _userService = userService;
         }
-        [HttpGet]
-        public IActionResult GetUsers() 
+
+        [HttpPost]
+        public async Task<IActionResult> InsertUser(string userName)
         {
-            return null;
+            await _userService.InsertUser(userName);  
+
+            return Ok($"{userName} has been created as a user.");
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllUsers() 
+        {
+            var users = await _userService.GetAllUsers();
+            return Ok(users);
         }
     }
 }

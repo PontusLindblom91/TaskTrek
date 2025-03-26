@@ -21,7 +21,7 @@ namespace TaskTrek.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("TaskTrek.Models.Entities.Task", b =>
+            modelBuilder.Entity("TaskTrek.Models.Entities.ProjectTask", b =>
                 {
                     b.Property<int>("TaskId")
                         .ValueGeneratedOnAdd()
@@ -29,17 +29,20 @@ namespace TaskTrek.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TaskId"));
 
+                    b.Property<int>("AssignedUser")
+                        .HasColumnType("int");
+
                     b.Property<string>("TaskDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TaskScope")
+                    b.Property<string>("TaskType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TaskId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("ProjectTasks");
                 });
 
             modelBuilder.Entity("TaskTrek.Models.Entities.User", b =>

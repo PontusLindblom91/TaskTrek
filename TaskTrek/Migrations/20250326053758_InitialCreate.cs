@@ -5,23 +5,24 @@
 namespace TaskTrek.Migrations
 {
     /// <inheritdoc />
-    public partial class initialCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Tasks",
+                name: "ProjectTasks",
                 columns: table => new
                 {
                     TaskId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TaskScope = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TaskDescription = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TaskType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TaskDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AssignedUser = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tasks", x => x.TaskId);
+                    table.PrimaryKey("PK_ProjectTasks", x => x.TaskId);
                 });
 
             migrationBuilder.CreateTable(
@@ -42,7 +43,7 @@ namespace TaskTrek.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Tasks");
+                name: "ProjectTasks");
 
             migrationBuilder.DropTable(
                 name: "Users");

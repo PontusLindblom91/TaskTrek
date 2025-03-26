@@ -14,6 +14,28 @@ namespace TaskTrek.Services
             _repo = repo;
         }
 
+        public async Task<List<ProjectTaskDTO>> GetAllProjectTasks()
+        {
+            var tasks = await _repo.GetAllProjectTasks();
+
+            var taskDTOs = new List<ProjectTaskDTO>();
+
+            foreach (var task in tasks)
+            {
+                var dto = new ProjectTaskDTO
+                {
+                    TaskDescription = task.TaskDescription,
+                    TaskStatus = task.TaskStatus,
+                    TaskType = task.TaskType,
+                    AssignedUser = task.AssignedUser,
+                };
+
+                taskDTOs.Add(dto);
+            }
+            return taskDTOs;
+        }
+
+
         public async Task InsertProjectTask(ProjectTaskDTO taskDto)
         {
             var task = new ProjectTask
@@ -24,6 +46,11 @@ namespace TaskTrek.Services
             };
 
             await _repo.InsertProjectTask(task);
+        }
+
+        public async Task DeleteProjectTask(int taskId)
+        {
+            await _repo.DeleteProjectTask(taskId);
         }
     }
 }

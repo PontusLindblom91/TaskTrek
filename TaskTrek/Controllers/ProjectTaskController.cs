@@ -11,19 +11,20 @@ namespace TaskTrek.Controllers
     {
         private readonly ProjectTaskService _taskService;
 
-        // Dependency injection via konstruktor
         public ProjectTaskController(ProjectTaskService taskService)
         {
             _taskService = taskService;
         }
 
         [HttpGet]
-        public IActionResult GetTasks()
+        public async Task<IActionResult> GetTasks()
         {
-            return null;
+            var tasks = await _taskService.GetAllProjectTasks();
+            return Ok(tasks);
         }
 
         [HttpPost]
+        [Route("InsertTask")]
         public async Task<IActionResult> PostTask(ProjectTaskDTO task)
         {
             await _taskService.InsertProjectTask(task); 
@@ -32,9 +33,10 @@ namespace TaskTrek.Controllers
 
 
         [HttpDelete]
-        public IActionResult DeleteTask(int TaskId)
+        public async Task<IActionResult> DeleteTask(int TaskId)
         {
-            return null;
+            await _taskService.DeleteProjectTask(TaskId);
+            return Ok();
         }
     }
 }

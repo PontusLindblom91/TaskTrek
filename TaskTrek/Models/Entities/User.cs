@@ -1,8 +1,10 @@
-﻿namespace TaskTrek.Models.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace TaskTrek.Models.Entities
 {
     public class User
     {
-        public int UserID { get; set; }
+        [Key] public int UserID { get; set; }
         public String UserName { get; set; }
     }
 }

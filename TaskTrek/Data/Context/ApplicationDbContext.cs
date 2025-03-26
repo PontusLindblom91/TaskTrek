@@ -11,7 +11,7 @@ namespace TaskTrek.Data.Context
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Models.Entities.ProjectTask> Tasks { get; set; }
+        public DbSet<ProjectTask> ProjectTasks { get; set; }
 
     }
 }
