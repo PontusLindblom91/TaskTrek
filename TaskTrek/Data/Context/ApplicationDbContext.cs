@@ -12,6 +12,7 @@ namespace TaskTrek.Data.Context
 
         public DbSet<User> Users { get; set; }
         public DbSet<ProjectTask> ProjectTasks { get; set; }
+        public DbSet<Sprint> Sprints { get; set; }
 
     }
 }

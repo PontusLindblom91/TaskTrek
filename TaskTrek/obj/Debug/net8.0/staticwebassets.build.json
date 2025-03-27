@@ -1,11 +1,12 @@
 {
   "Version": 1,
-  "Hash": "/gMYL/AtN63xdgqgb9WOXofhNtww2fNrzWj3td1gvBE=",
+  "Hash": "08aR4Az7W5KwXmQw/0o7o1M6ovRvEx6DkTi8Q9xIyrg=",
   "Source": "TaskTrek",
   "BasePath": "_content/TaskTrek",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }

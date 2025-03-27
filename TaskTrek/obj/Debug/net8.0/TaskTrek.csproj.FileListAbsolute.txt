@@ -26,7 +26,6 @@ C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\tasktrek\obj\Debug\net8.0
 C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\tasktrek\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.TaskTrek.props
 C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\tasktrek\obj\Debug\net8.0\staticwebassets.pack.json
 C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\tasktrek\obj\Debug\net8.0\scopedcss\bundle\TaskTrek.styles.css
-C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\tasktrek\obj\Debug\net8.0\TaskTrek.csproj.CopyComplete
 C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\tasktrek\obj\Debug\net8.0\TaskTrek.dll
 C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\tasktrek\obj\Debug\net8.0\refint\TaskTrek.dll
 C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\tasktrek\obj\Debug\net8.0\TaskTrek.pdb
@@ -169,3 +168,7 @@ C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\bin\Debug\net8.0
 C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\bin\Debug\net8.0\TaskTrek.staticwebassets.endpoints.json
+C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\obj\Debug\net8.0\staticwebassets\msbuild.TaskTrek.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\obj\Debug\net8.0\TaskTrek.csproj.Up2Date

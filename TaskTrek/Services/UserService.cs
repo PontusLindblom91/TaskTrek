@@ -16,7 +16,6 @@ namespace TaskTrek.Services
         public async Task InsertUser(string userName)
         {
             var user = new User { UserName = userName };
-
             await _userRepo.InsertUser(user);
         }
 

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TaskTrek")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0bc40cb6f42b41f0e1d0a2c941ed0142dece8273")]
 [assembly: System.Reflection.AssemblyProductAttribute("TaskTrek")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TaskTrek")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

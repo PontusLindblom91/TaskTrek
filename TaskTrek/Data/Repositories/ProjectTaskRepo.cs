@@ -33,5 +33,12 @@ namespace TaskTrek.Data.Repositories
                 .Where(pt => pt.TaskId == taskId)
                 .ExecuteDeleteAsync();
         }
+
+        public async Task<bool> TaskExists(int taskId)
+        {
+            var task = await _context.ProjectTasks.FindAsync(taskId);
+            return task != null;
+        }
+
     }
 }
