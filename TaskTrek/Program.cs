@@ -15,6 +15,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddScoped<ProjectTaskService>();
 builder.Services.AddScoped<ProjectTaskRepo>();
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<UserRepo>();
+builder.Services.AddScoped<SprintService>();
+builder.Services.AddScoped<SprintRepo>();
 
 
 var app = builder.Build();

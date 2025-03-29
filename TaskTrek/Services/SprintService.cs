@@ -34,15 +34,20 @@ namespace TaskTrek.Services
         }
 
 
-        public async Task<bool> AddTaskToSprint(int sprintId, int taskId)
+        public async Task<bool> AddTaskToSprint(Guid sprintId, int taskId)
         {
-            var exists = await _projectTaskRepo.TaskExists(taskId);
-
-            if (exists)
+            var task = await _projectTaskRepo.TaskExists(taskId);
+            if (!task)   
+                return false;
+            var sprint = await _sprintRepo.FindSprint(sprintId);
+            if (sprint == null)
+                return false;
+            if (!sprint.TaskIds.Contains(taskId))
             {
-                await _sprintRepo.AddTaskToSprint();
+                sprint.TaskIds.Add(taskId);
             }
-            return false;
+            await _sprintRepo.AddTaskToSprint(sprint);
+            return true;
         }
     }
 }

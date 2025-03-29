@@ -19,7 +19,7 @@ namespace TaskTrek.Controllers
             _sprintService = sprintService;
         }
 
-        [HttpGet]
+        [HttpGet("sprints")]
         public async Task<IActionResult> GetSprints()
         {
             var sprints = await _sprintService.GetAllSprints();
@@ -27,15 +27,15 @@ namespace TaskTrek.Controllers
             return Ok(sprints);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> PostSprint(AddSprintDTO sprint)
+        [HttpPost("post")]
+        public async Task<IActionResult> PostSprint([FromQuery]AddSprintDTO sprint)
         {
             await _sprintService.PostSprint(sprint);
             return Ok($"{sprint} has been inserted.");
         }
 
         [HttpPost("{sprintId}/tasks")]
-        public async Task<IActionResult> AddTaskToSprint(int sprintId, int taskId)
+        public async Task<IActionResult> AddTaskToSprint(Guid sprintId, int taskId)
         {
             var added = await _sprintService.AddTaskToSprint(sprintId, taskId);
             if (added)

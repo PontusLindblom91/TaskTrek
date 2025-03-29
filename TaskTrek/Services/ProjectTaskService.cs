@@ -8,10 +8,12 @@ namespace TaskTrek.Services
     public class ProjectTaskService
     {
         private readonly ProjectTaskRepo _repo;
+        private readonly UserRepo _userRepo;
 
-        public ProjectTaskService(ProjectTaskRepo repo)
+        public ProjectTaskService(ProjectTaskRepo repo, UserRepo userRepo)
         {
             _repo = repo;
+            _userRepo = userRepo;
         }
 
         public async Task<List<ProjectTaskDTO>> GetAllProjectTasks()
@@ -22,12 +24,14 @@ namespace TaskTrek.Services
 
             foreach (var task in tasks)
             {
+                var user = await _userRepo.GetUserById(task.AssignedUser);
+
                 var dto = new ProjectTaskDTO
                 {
                     TaskDescription = task.TaskDescription,
                     TaskStatus = task.TaskStatus,
                     TaskType = task.TaskType,
-                    AssignedUser = task.AssignedUser,
+                    AssignedUser = user,
                 };
 
                 taskDTOs.Add(dto);
@@ -38,11 +42,14 @@ namespace TaskTrek.Services
 
         public async Task InsertProjectTask(ProjectTaskDTO taskDto)
         {
+            var user = await _userRepo.GetUserByUserName(taskDto.AssignedUser);
+
             var task = new ProjectTask
             {
                 TaskDescription = taskDto.TaskDescription,
                 TaskType = taskDto.TaskType,
-                AssignedUser = taskDto.AssignedUser,
+                AssignedUser = user,
+                TaskStatus= taskDto.TaskStatus,
             };
 
             await _repo.InsertProjectTask(task);

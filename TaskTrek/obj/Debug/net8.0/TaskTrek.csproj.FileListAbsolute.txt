@@ -172,3 +172,4 @@ C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\bin\Debug\net8.0
 C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\obj\Debug\net8.0\staticwebassets\msbuild.TaskTrek.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
 C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\obj\Debug\net8.0\TaskTrek.csproj.Up2Date
+C:\Users\pontu\Hot-Coding\Projekt\Examensarbete-Jensen\TaskTrek\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

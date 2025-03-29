@@ -32,7 +32,7 @@ namespace TaskTrek.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<Sprint> FindSprint(int sprintId)
+        public async Task<Sprint> FindSprint(Guid sprintId)
         {
             var sprint = await _context.Sprints.FindAsync(sprintId);
 

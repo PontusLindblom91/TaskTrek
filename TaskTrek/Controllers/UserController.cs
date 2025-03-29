@@ -15,16 +15,15 @@ namespace TaskTrek.Controllers
             _userService = userService;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> InsertUser(string userName)
         {
-            await _userService.InsertUser(userName);  
+            await _userService.InsertUser(userName);
 
             return Ok($"{userName} has been created as a user.");
         }
 
-
-        [HttpGet]
+        [HttpGet("users")]
         public async Task<IActionResult> GetAllUsers() 
         {
             var users = await _userService.GetAllUsers();

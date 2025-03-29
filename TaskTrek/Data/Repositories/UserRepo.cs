@@ -1,4 +1,5 @@
-﻿using TaskTrek.Data.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using TaskTrek.Data.Context;
 using TaskTrek.Models.Entities;
 
 namespace TaskTrek.Data.Repositories
@@ -22,6 +23,26 @@ namespace TaskTrek.Data.Repositories
         {
             var users = _context.Users.ToList();
             return users;
+        }
+
+        public async Task<int> GetUserByUserName(string userName)
+        {
+            var user = await _context.Users
+        .Where(u => u.UserName == userName)
+        .Select(u => u.UserID)
+        .FirstAsync();
+
+            return user;
+        }
+
+        public async Task<string> GetUserById(int userId)
+        {
+            var user = await _context.Users
+        .Where(u => u.UserID == userId)
+        .Select(u => u.UserName)
+        .FirstOrDefaultAsync();
+
+            return user;
         }
     }
 }
