@@ -1,0 +1,81 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+name: TaskTrek-CI
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  project: '**/TaskTrek.csproj'
+
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: BuildJob
+    displayName: 'Restore, Build, Test & Publish'
+    steps:
+    - task: NuGetToolInstaller@1
+      name: 'NuGetToolInstaller'
+      displayName: 'NuGet tool installer'
+
+    - task: NuGetCommand@2
+      name: 'NuGetRestore'
+      displayName: 'NuGet restore packages'
+      inputs:
+        command: restore
+        restoreSolution: '$(solution)'
+        feedsToUse: 'select'
+
+    - task: DotNetCoreCLI@2
+      name: 'Tests'
+      displayName: 'Run Tests'
+      inputs:
+        command: 'test'
+        projects: '$(solution)'
+        arguments: '--configuration $(buildConfiguration)'
+
+    - task: DotNetCoreCLI@2
+      name: 'Publish'
+      displayName: 'Publish'
+      inputs:
+        command: 'publish'
+        publishWebProjects: true
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: true
+
+    - task: PublishBuildArtifacts@1
+      name: 'PublishBuildArtifacts'
+      displayName: 'Publish build artifacts'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'TaskTrek'
+        publishLocation: 'Container'
+
+- stage: Deploy
+  displayName: 'Deploy Stage'
+  dependsOn: Build
+  jobs:
+  - job: DeployJob
+    displayName: 'Deploy to Azure'
+    steps:
+    - download: current
+      artifact: TaskTrek
+
+    - task: AzureWebApp@1
+      displayName: 'Deploy to Azure App Service'
+      inputs:
+        azureSubscription: 'azurejensen051(4df60b05-5284-4aea-b43d-4d9c262df358)'
+        appType: 'webApp'
+        appName: 'TaskTrek'
+        package: '$(Pipeline.Workspace)/TaskTrek/**/*.zip'
+
