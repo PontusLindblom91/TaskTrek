@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskTrek", "TaskTrek.csproj", "{B44B2F8E-89D1-4197-ACE4-B93FD2144B2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskTrek.Tests", "..\TaskTrek.Tests\TaskTrek.Tests.csproj", "{998A8B04-6131-46D8-A62E-266CB972C7BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B44B2F8E-89D1-4197-ACE4-B93FD2144B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B44B2F8E-89D1-4197-ACE4-B93FD2144B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B44B2F8E-89D1-4197-ACE4-B93FD2144B2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{998A8B04-6131-46D8-A62E-266CB972C7BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{998A8B04-6131-46D8-A62E-266CB972C7BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{998A8B04-6131-46D8-A62E-266CB972C7BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{998A8B04-6131-46D8-A62E-266CB972C7BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
