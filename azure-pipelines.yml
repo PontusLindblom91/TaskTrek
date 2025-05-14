@@ -28,15 +28,22 @@ stages:
       name: 'NuGetToolInstaller'
       displayName: 'NuGet tool installer'
       
-      
+          
     - task: Cache@2
-      name: 'CacheNuGetPackages'
-      displayName: 'Cache NuGet packages'
       inputs:
-        key: '$(nugetCacheKey)'
-        restoreKeys: |
-          nuget | $(Agent.OS)
-        path: $(USERPROFILE)\.nuget\packages
+        key: nuget | $(Agent.OS) | **/*.nupkg
+        path: $(Build.SourcesDirectory)/packages
+        cacheHitVar: NUGET_CACHE_HIT
+
+    - script: |
+        echo "Cache status: $(NUGET_CACHE_HIT)"
+      displayName: 'Check Cache Status'
+
+    - task: NuGetCommand@2
+      displayName: 'Restore NuGet Packages'
+      inputs:
+        restoreSolution: '**/*.sln'
+
 
     - task: NuGetCommand@2
       name: 'NuGetRestore'
