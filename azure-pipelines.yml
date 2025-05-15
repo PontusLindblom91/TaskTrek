@@ -16,6 +16,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   project: '**/TaskTrek.csproj'
+  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
 
 stages:
 - stage: Build
@@ -30,12 +31,15 @@ stages:
       
     - task: Cache@2
       name: CacheNuGetPackages
-      displayName: 'Cache NuGet Packages (workspace path)'
+      displayName: 'Cache NuGet Packages'
       inputs:
-        key: 'nuget | $(Agent.OS) | $(hashFiles("**/*.csproj"))'
+        key: 'nuget | "$(Agent.OS)" | $(hashFiles("**/packages.lock.json"))'
         restoreKeys: |
           nuget | "$(Agent.OS)"
-        path: $(Pipeline.Workspace)/.nuget/packages
+          nuget
+        path: $(UserProfile)\.nuget\packages
+        cacheHitVar: 'CACHE_RESTORED'
+
         
     - task: PowerShell@2
       displayName: 'Show NuGet cache size'
