@@ -1,0 +1,107 @@
+name: TaskTrek-CI
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  project: '**/TaskTrek.csproj'
+  testProject: '**/*Tests.csproj'
+
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: BuildJob
+    displayName: 'Restore, Build & Publish'
+    steps:
+    - task: NuGetToolInstaller@1
+      displayName: 'NuGet tool installer'
+          
+    - task: Cache@2
+      displayName: 'Cache NuGet packages'
+      inputs:
+        key: 'nuget | "$(Agent.OS)" | **/*.csproj'
+        restoreKeys: |
+          nuget | "$(Agent.OS)"
+        path: $(USERPROFILE)\.nuget\packages
+
+    - task: NuGetCommand@2
+      displayName: 'NuGet restore packages'
+      inputs:
+        command: restore
+        restoreSolution: '$(solution)'
+        feedsToUse: 'select'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Build solution'
+      inputs:
+        command: 'build'
+        projects: '$(solution)'
+        arguments: '--configuration $(buildConfiguration)'
+
+    - task: DotNetCoreCLI@2
+      displayName: 'Publish'
+      inputs:
+        command: 'publish'
+        publishWebProjects: true
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: true
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish build artifacts'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'TaskTrek'
+        publishLocation: 'Container'
+
+- stage: Test
+  displayName: 'Test Stage'
+  dependsOn: Build
+  jobs:
+  - job: RunTests1
+    displayName: 'Run Tests – Part 1'
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'Run Tests 1 (no build)'
+      inputs:
+        command: 'test'
+        projects: '$(testProject)'
+        arguments: '--configuration $(buildConfiguration) --no-build'
+
+  - job: RunTests2
+    displayName: 'Run Tests – Part 2'
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: 'Run Tests 2 (no build)'
+      inputs:
+        command: 'test'
+        projects: '$(testProject)'
+        arguments: '--configuration $(buildConfiguration) --no-build'
+
+- stage: Deploy
+  displayName: 'Deploy Stage'
+  dependsOn: Test
+  jobs:
+  - job: DeployJob
+    displayName: 'Deploy to Azure'
+    steps:
+    - download: current
+      artifact: TaskTrek
+
+    - task: AzureWebApp@1
+      displayName: 'Deploy to Azure App Service'
+      inputs:
+        azureSubscription: 'azurejensen051(4df60b05-5284-4aea-b43d-4d9c262df358)'
+        appType: 'webApp'
+        appName: 'TaskTrek'
+        package: '$(Pipeline.Workspace)/TaskTrek/**/*.zip'
