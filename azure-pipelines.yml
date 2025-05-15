@@ -16,7 +16,6 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   project: '**/TaskTrek.csproj'
-  NUGET_PACKAGES: $(Pipeline.Workspace)/.nuget/packages
 
 stages:
 - stage: Build
@@ -28,32 +27,15 @@ stages:
     - task: NuGetToolInstaller@1
       name: 'NuGetToolInstaller'
       displayName: 'NuGet tool installer'
-      
+          
     - task: Cache@2
-      name: CacheNuGetPackages
-      displayName: 'Cache NuGet Packages'
+      name: 'CacheNuGetPackages'
+      displayName: 'Cache NuGet packages'
       inputs:
-        key: 'nuget | "$(Agent.OS)" | $(hashFiles("**/packages.lock.json"))'
+        key: '$(nugetCacheKey)'
         restoreKeys: |
-          nuget | "$(Agent.OS)"
-          nuget
-        path: $(UserProfile)\.nuget\packages
-        cacheHitVar: 'CACHE_RESTORED'
-
-        
-    - task: PowerShell@2
-      displayName: 'Show NuGet cache size'
-      inputs:
-        targetType: 'inline'
-        script: |
-          $path = "$(Pipeline.Workspace)/.nuget/packages"
-          if (Test-Path $path) {
-            $size = (Get-ChildItem -Recurse -Force $path | Measure-Object -Property Length -Sum).Sum / 1MB
-            Write-Host "##[section]NuGet cache size: {0:N2} MB" -f $size
-          } else {
-            Write-Host "No NuGet cache found."
-          }
-
+          nuget | $(Agent.OS)
+        path: $(USERPROFILE)\.nuget\packages
 
     - task: NuGetCommand@2
       name: 'NuGetRestore'
