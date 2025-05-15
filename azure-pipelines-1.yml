@@ -70,11 +70,11 @@ stages:
       vmImage: 'windows-latest'
     steps:
     - task: DotNetCoreCLI@2
-      displayName: 'Run Tests 1 (no build)'
+      displayName: 'Run Tests 1'
       inputs:
         command: 'test'
         projects: '$(testProject)'
-        arguments: '--configuration $(buildConfiguration) --no-build'
+        arguments: '--configuration $(buildConfiguration)'
 
   - job: RunTests2
     displayName: 'Run Tests – Part 2'
@@ -82,11 +82,11 @@ stages:
       vmImage: 'windows-latest'
     steps:
     - task: DotNetCoreCLI@2
-      displayName: 'Run Tests 2 (no build)'
+      displayName: 'Run Tests 2'
       inputs:
         command: 'test'
         projects: '$(testProject)'
-        arguments: '--configuration $(buildConfiguration) --no-build'
+        arguments: '--configuration $(buildConfiguration)'
 
 - stage: Deploy
   displayName: 'Deploy Stage'
