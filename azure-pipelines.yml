@@ -28,21 +28,27 @@ stages:
       name: 'NuGetToolInstaller'
       displayName: 'NuGet tool installer'
       
-          
     - task: Cache@2
+      name: CacheNuGetPackages
+      displayName: 'Cache NuGet Packages (workspace path)'
       inputs:
-        key: nuget | $(Agent.OS) | **/*.nupkg
-        path: $(Build.SourcesDirectory)/packages
-        cacheHitVar: NUGET_CACHE_HIT
-
-    - script: |
-        echo "Cache status: $(NUGET_CACHE_HIT)"
-      displayName: 'Check Cache Status'
-
-    - task: NuGetCommand@2
-      displayName: 'Restore NuGet Packages'
+        key: 'nuget | "$(Agent.OS)" | "$(Build.SourcesDirectory)/**/*.csproj"'
+        restoreKeys: |
+          nuget | "$(Agent.OS)"
+        path: $(Pipeline.Workspace)/.nuget/packages
+        
+    - task: PowerShell@2
+      displayName: 'Show NuGet cache size'
       inputs:
-        restoreSolution: '**/*.sln'
+        targetType: 'inline'
+        script: |
+          $path = "$(Pipeline.Workspace)/.nuget/packages"
+          if (Test-Path $path) {
+            $size = (Get-ChildItem -Recurse -Force $path | Measure-Object -Property Length -Sum).Sum / 1MB
+            Write-Host "##[section]NuGet cache size: {0:N2} MB" -f $size
+          } else {
+            Write-Host "No NuGet cache found."
+          }
 
 
     - task: NuGetCommand@2
