@@ -32,7 +32,7 @@ stages:
       name: CacheNuGetPackages
       displayName: 'Cache NuGet Packages (workspace path)'
       inputs:
-        key: 'nuget | "$(Agent.OS)" | "$(Build.SourcesDirectory)/**/*.csproj"'
+        key: 'nuget | $(Agent.OS) | $(hashFiles("**/*.csproj"))'
         restoreKeys: |
           nuget | "$(Agent.OS)"
         path: $(Pipeline.Workspace)/.nuget/packages
