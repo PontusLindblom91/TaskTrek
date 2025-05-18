@@ -23,9 +23,10 @@ stages:
       displayName: 'Cache NuGet packages'
       inputs:
         key: 'nuget | "$(Agent.OS)" | **/*.csproj'
-        path: ~/.nuget/packages
+        path: '$(UserProfile)\.nuget\packages'
         restoreKeys: |
           nuget | "$(Agent.OS)"
+
 
     - task: DotNetCoreCLI@2
       displayName: 'Restore packages'
