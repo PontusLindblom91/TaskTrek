@@ -69,3 +69,8 @@ stages:
 
     - task: AzureWebApp@1
       displayName: 'Deploy to Azure App Service'
+      inputs:
+        azureSubscription: 'azurejensen051(4df60b05-5284-4aea-b43d-4d9c262df358)'
+        appType: 'webApp'
+        appName: 'TaskTrek'
+        package: '$(Pipeline.Workspace)/TaskTrek/**/*.zip'
